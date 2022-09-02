@@ -71,4 +71,4 @@ function Drink({ drinks }) {
   `
 }
 
-customElements.define("app-drink", component(Drink));
+customElements.define("drink-result", component(Drink));

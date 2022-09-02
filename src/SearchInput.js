@@ -45,10 +45,14 @@ function SearchInput(_el) {
       height: 100%;
       width: 40%;
       box-sizing: border-box;
+      border: 1px solid white;
     }
 
     button {
       height: 100%;
+      border: 1px solid white;
+      background-color: #303f42;
+      color: #a7dbe5;
     }
   </style>
   `
