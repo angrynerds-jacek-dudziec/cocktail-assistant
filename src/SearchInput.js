@@ -5,7 +5,7 @@ import {
   useEffect
 } from "haunted";
 
-function SearchInput(_el) {
+function SearchInput() {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function SearchInput(_el) {
   }
 
   return html`
-  <div>
+  <div class="container">
     <input
       value=${query}
       type="text"

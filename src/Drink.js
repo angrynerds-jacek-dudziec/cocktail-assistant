@@ -23,7 +23,7 @@ function Drink({ drinks }) {
 
   return html`
   <div class="container">
-    <img src=${drinks.strDrinkThumb}/>
+    <img class="container__image" src=${drinks.strDrinkThumb}/>
     <div class="container__info">
       <h2 class="container__name">${drinks.strDrink}</h2>
       <p class="container__instructions">${drinks.strInstructions}</p>
@@ -61,7 +61,7 @@ function Drink({ drinks }) {
       margin: 5px 0;
     }
 
-    img {
+    .container__image {
       width: auto;
       height: 100%;
       border: 1px solid white;

@@ -27,7 +27,9 @@ function ShoppingList({ ingredientsList, onChangeName }) {
     <div>
       <h3>Shopping List</h3>
         ${ingredientsList.length > 0 ?
-      html`<ul>${ingredientsList.map(ingredient => html`<li>${ingredient}<button class="delete-button" @click=${() => onRemoveClick(ingredient)}>❌</button></li>`)}</ul>
+      html`<ul>
+            ${ingredientsList.map(ingredient => html`<li>${ingredient}<button class="delete-button" @click=${() => onRemoveClick(ingredient)}>❌</button></li>`)}
+          </ul>
           <button @click=${() => onPrintClick()}>Print</button>` :
       html`<p>Shopping list is empty...</p>`}
     </div>

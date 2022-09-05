@@ -8,19 +8,20 @@ import { nothing } from 'lit';
 
 function Toast(props) {
   const [isDisplayed, setIsDisplayed] = useState(false);
+  const toastTimeout = 3000;
 
   useEffect(() => {
-    if (!props.message[0]) { return }
-    setIsDisplayed(!!props.message); 
+    if (!props.toastMessage[0]) { return }
+    setIsDisplayed(!!props.toastMessage); 
 
     const timeout = setTimeout(() => {
       setIsDisplayed(false);
-      props.setMessage('');
-    }, 3000);
+      props.setToastMessage('');
+    }, toastTimeout);
 
     setIsDisplayed(true);
     return () => {clearTimeout(timeout);}
-  }, [props.message]);
+  }, [props.toastMessage]);
 
 
   const closeToast = () => {
@@ -29,12 +30,12 @@ function Toast(props) {
 
   return html`
   ${isDisplayed ?
-      html`<div class="container" @click=${closeToast}><p class="is-entrance">${props.message[0]}</p></div>` :
+      html`<div class="container" @click=${closeToast}><p class="is-entrance">${props.toastMessage[0]}</p></div>` :
       nothing
     }
 
   <style>
-    .container {
+    div {
       width: 300px;
       height: 50px;
       background-color: black;
@@ -44,17 +45,15 @@ function Toast(props) {
       right: 25px;
       z-index: 9999;
       cursor: pointer;
-
       display: flex;
-      flex-direction: column;
-      box-sizing: border-box;
+      align-items: center;
+      justify-content: center;
     }
 
     p {
       text-align: center;
       color: white;
       margin: 0;
-      height: 100%;
     }
   </style>
   `

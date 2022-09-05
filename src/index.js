@@ -12,8 +12,8 @@ import { nothing } from 'lit';
 function App() {
   const [results, setResults] = useState("");
   const [toastMessage, setToastMessage] = useState([]);
-  const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
   const [ingredientsList, setIngredientsList] = useState([]);
+  const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
   const onSearch = (query) => {
     setToastMessage(['Searching...']);
@@ -26,6 +26,9 @@ function App() {
           return;
         }
         setToastMessage(['Here are the results.']) })
+      .catch(_error => {
+        setToastMessage(['There was an unexpected error during search.'])
+      })
   }
 
   const onAddIngredients = (newIngredients) => {
@@ -67,7 +70,7 @@ function App() {
       <shopping-list .ingredientsList=${ingredientsList} .onChangeName=${handleNameChange}></shopping-list>
     </div>
 
-    <app-toast .message=${toastMessage} .setMessage=${setToastMessage}></app-toast>
+    <app-toast .toastMessage=${toastMessage} .setToastMessage=${setToastMessage}></app-toast>
 
     <style>
       h1 {
@@ -77,13 +80,6 @@ function App() {
       .container {
         display: flex;
         justify-content: center;
-      }
-
-      body {
-        background-color: #303f42;
-        color: #a7dbe5;
-        font-family: "Roboto", sans-serif;
-        margin: 0;
       }
     </style>
     `;
