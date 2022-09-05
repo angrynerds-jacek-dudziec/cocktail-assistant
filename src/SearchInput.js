@@ -1,19 +1,11 @@
 import {
   html,
   component,
-  useState,
-  useEffect
+  useState
 } from "haunted";
 
 function SearchInput() {
-  const [query, setQuery] = useState("");
-
-  useEffect(() => {
-    const event = new CustomEvent('change', {
-      detail: `${query}`
-    });
-    this.dispatchEvent(event);
-  }, [query]);
+  const [query, setQuery] = useState([]);
 
   const initSearch = () => {
     const event = new CustomEvent('init-search', {
@@ -27,8 +19,8 @@ function SearchInput() {
     <input
       value=${query}
       type="text"
-      name="query"
-      @keyup=${ev => setQuery(ev.target.value)}
+      @keyup=${e => setQuery(e.target.value)}
+      @keydown=${e => e.key === 'Enter' && initSearch()}
     />
     <button @click=${initSearch}>Search</button>
   </div>

@@ -4,15 +4,15 @@ import {
   useEffect,
   useState
 } from "haunted";
-import { nothing } from 'lit';
+import { when } from 'lit/directives/when.js';
 
 function Toast(props) {
   const [isDisplayed, setIsDisplayed] = useState(false);
   const toastTimeout = 3000;
 
   useEffect(() => {
-    if (!props.toastMessage[0]) { return }
-    setIsDisplayed(!!props.toastMessage); 
+    if (!props.toastMessage.length) { return }
+    setIsDisplayed(!!props.toastMessage);
 
     const timeout = setTimeout(() => {
       setIsDisplayed(false);
@@ -20,7 +20,7 @@ function Toast(props) {
     }, toastTimeout);
 
     setIsDisplayed(true);
-    return () => {clearTimeout(timeout);}
+    return () => { clearTimeout(timeout); }
   }, [props.toastMessage]);
 
 
@@ -29,10 +29,9 @@ function Toast(props) {
   }
 
   return html`
-  ${isDisplayed ?
-      html`<div class="container" @click=${closeToast}><p class="is-entrance">${props.toastMessage[0]}</p></div>` :
-      nothing
-    }
+  ${when(isDisplayed,
+    () => html`<div class="container" @click=${closeToast}><p class="is-entrance">${props.toastMessage}</p></div>`
+  )}
 
   <style>
     div {
